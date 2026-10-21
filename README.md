@@ -168,3 +168,4 @@ docker compose pull
 ---
 
 > [个人网站](https://innei.in/) · GitHub [@Innei](https://github.com/innei/)
+Cloudflare Workers Builds auto-deploys from main.
