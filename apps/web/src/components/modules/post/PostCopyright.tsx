@@ -9,12 +9,11 @@ import { toast } from '~/lib/toast'
 import { useCurrentPostDataSelector } from '~/providers/post/CurrentPostDataProvider'
 import { useAggregationSelector } from '~/providers/root/aggregation-data-provider'
 
-
 export const PostCopyright: FC = () => {
   const t = useTranslations('post')
   const tCommon = useTranslations('common')
   const format = useFormatter()
-  const name = useAggregationSelector((data) => data.user.name)
+  const name = useAggregationSelector((data) => data.user?.name ?? '')
 
   const webUrl = useAggregationSelector((data) => data.url.webUrl)
   const data = useCurrentPostDataSelector(

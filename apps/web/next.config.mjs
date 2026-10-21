@@ -32,7 +32,9 @@ let nextConfig = {
 
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
-  output: 'standalone',
+  // OpenNext (Cloudflare Workers) builds must not use the standalone output;
+  // CF_BUILD=1 is set by the build:cf script.
+  output: process.env.CF_BUILD ? undefined : 'standalone',
   assetPrefix: isProd ? env.ASSETPREFIX || undefined : undefined,
   typescript: {
     ignoreBuildErrors: true,

@@ -103,20 +103,22 @@ export const AuthProvidersRender: FC = () => {
 
 const AuthjsLoginModalContent = () => {
   const title = useAggregationSelector((s) => s.seo.title)
-  const ownerAvatar = useAggregationSelector((s) => s.user.avatar)!
+  const ownerAvatar = useAggregationSelector((s) => s.user?.avatar)
 
   const isMobile = useIsMobile()
 
   const Inner = (
     <>
       <div className="-mt-24 mb-4 flex items-center justify-center md:-mt-12">
-        <Image
-          className="rounded-full shadow-lg"
-          height={60}
-          width={60}
-          src={ownerAvatar}
-          alt="site owner"
-        />
+        {ownerAvatar && (
+          <Image
+            className="rounded-full shadow-lg"
+            height={60}
+            width={60}
+            src={ownerAvatar}
+            alt="site owner"
+          />
+        )}
       </div>
       <div className="-mt-0 text-center">
         登录到 <b>{title}</b>

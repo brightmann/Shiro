@@ -12,7 +12,7 @@ import { useLiveQuery } from './useLiveQuery'
 
 export const SiteOwnerAvatar: Component = ({ className }) => {
   const t = useTranslations('common')
-  const avatar = useAggregationSelector((data) => data.user.avatar)
+  const avatar = useAggregationSelector((data) => data.user?.avatar)
 
   const { data: isLiving } = useLiveQuery()
 

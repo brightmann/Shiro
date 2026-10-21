@@ -25,12 +25,12 @@ export default function Home() {
     description: config?.seo.description,
     author: {
       '@type': 'Person',
-      name: config?.user.name,
+      name: config?.user?.name ?? '',
       url: config?.url.webUrl,
     },
     publisher: {
       '@type': 'Person',
-      name: config?.user.name,
+      name: config?.user?.name ?? '',
       url: config?.url.webUrl,
     },
     image: {
@@ -58,7 +58,7 @@ export default function Home() {
           '@type': 'BlogPosting',
           author: {
             '@type': 'Person',
-            name: config?.user.name,
+            name: config?.user?.name ?? '',
             url: config?.url.webUrl,
           },
           headline: article.title,

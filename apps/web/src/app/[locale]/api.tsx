@@ -24,6 +24,13 @@ export const fetchAggregationData = async () => {
       params: {
         theme: 'shiro',
       },
+      // Mix Space Core rejects requests with an empty User-Agent as
+      // crawlers (403). Raw ofetch sends none, and the server-side
+      // attachFetchHeader is a noop, so set one explicitly here —
+      // same pattern as the check_logged fetch in layout.tsx.
+      headers: {
+        'user-agent': 'Shiro',
+      },
     }).then(simpleCamelcaseKeys)) as AggregateRoot & {
       theme: AppThemeConfig
     }

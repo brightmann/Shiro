@@ -120,11 +120,12 @@ export const generateMetadata = async ({
       url: url.webUrl,
       images: {
         url: `${url.webUrl}/home-og`,
-        username: user.name,
+        // Fresh Core has no master user yet (user: null) — don't crash metadata.
+        username: user?.name ?? '',
       },
     },
     twitter: {
-      creator: `@${user.socialIds?.twitter || user.socialIds?.x || '__oQuery'}`,
+      creator: `@${user?.socialIds?.twitter || user?.socialIds?.x || '__oQuery'}`,
       card: 'summary_large_image',
       title: seo.title,
       description: seo.description,

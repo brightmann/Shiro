@@ -5,7 +5,8 @@ import { apiClient } from '~/lib/request'
 
 export const revalidate = 86400 // 24 hours
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 const resOptions = {
   width: 1200,

@@ -35,7 +35,7 @@ export const LdJsonWithAuthor = ({
         ...baseLdJson,
         author: {
           '@type': 'Person',
-          name: state.user.name,
+          name: state.user?.name ?? '',
           url: state.url.webUrl,
         },
       }) as WithContext<BlogPosting>,
@@ -101,9 +101,7 @@ export const PostMetaBarInternal: Component = ({ className }) => {
   })
 
   if (!meta) return null
-  return (
-    <PostMetaBar meta={meta} className={className} />
-  )
+  return <PostMetaBar meta={meta} className={className} />
 }
 
 export const PostDataReValidate: FC<{

@@ -32,7 +32,9 @@ import { useMenuOpacity } from './hooks'
 import { UserAuthFromIcon } from './UserAuthFromIcon'
 
 const OwnerAvatar = () => {
-  const ownerAvatar = useAggregationSelector((s) => s.user.avatar)!
+  const ownerAvatar = useAggregationSelector((s) => s.user?.avatar)
+
+  if (!ownerAvatar) return null
 
   return (
     <div className="pointer-events-auto relative flex items-center justify-center">
