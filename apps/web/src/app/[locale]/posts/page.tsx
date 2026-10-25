@@ -16,7 +16,6 @@ import { apiClient } from '~/lib/request'
 import { definePrerenderPage } from '~/lib/request.server'
 
 import { PostListDataRevaildate } from './data-revalidate'
-import { PostLoadMore } from './loader'
 
 interface Props extends LocaleParams {
   page?: string
@@ -45,7 +44,7 @@ export default definePrerenderPage<Props>()({
   fetcher: async (params) => {
     const { page, size, orderBy, sortBy, lang, locale } = params || {}
     const currentPage = page ? Number.parseInt(page) : 1
-    const currentSize = size ? Number.parseInt(size) : 10
+    const currentSize = size ? Number.parseInt(size) : 5
 
     // 如果指定了 lang=original，不传 lang 参数
     const preferredLang = lang === 'original' ? undefined : lang || locale
@@ -60,9 +59,6 @@ export default definePrerenderPage<Props>()({
   Component: async (props) => {
     const { params, fetchedAt } = props
     const { data, pagination } = props.data
-    const { page } = params
-
-    const currentPage = page ? Number.parseInt(page) : 1
 
     if (!data?.length) {
       return <NothingFound />
@@ -77,11 +73,15 @@ export default definePrerenderPage<Props>()({
           ))}
         </ul>
 
-        {currentPage > 1 ? (
-          <PostPagination pagination={pagination} />
-        ) : (
-          pagination.hasNextPage && <PostLoadMore pagination={pagination} />
-        )}
+        <PostPagination
+          pagination={pagination}
+          query={{
+            sortBy: params.sortBy,
+            orderBy: params.orderBy,
+            lang: params.lang,
+            size: params.size,
+          }}
+        />
 
         <PostsSettingFab />
         <PostTagsFAB />
